@@ -1,0 +1,18 @@
+input.txt
+.DS_Store
+.idea
+.vscode
+
+*.bin
+*.pkl
+*.pyc
+*.pt
+*.pth
+*.ckpt
+*.tar
+*.npz
+*.out
+
+# Directories
+**/__pycache__/
+.ipynb_checkpoints/
