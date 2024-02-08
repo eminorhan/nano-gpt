@@ -38,6 +38,7 @@ tokenized = raw_datasets.map(
 # concatenate all the ids in each dataset into one large file we can use for training
 for split, dset in tokenized.items():
     arr_len = np.sum(dset['len'], dtype=np.uint64)
+    print(f"total size of {split} split is {arr_len} tokens.")
     filename = os.path.join(os.path.dirname(__file__), f'{split}.bin')
     dtype = np.uint16  # (can do since vocab_size < 2**16)
     arr = np.memmap(filename, dtype=dtype, mode='w+', shape=(arr_len,))
@@ -53,9 +54,9 @@ for split, dset in tokenized.items():
         idx += len(arr_batch)
     arr.flush()
 
-# train.bin is ~17GB, val.bin ~8.5MB
-# train has ~9B tokens (9,035,582,198)
-# val has ~4M tokens (4,434,897)
+# train.bin is ~1.1GB, val.bin ~10.7MB
+# train has ~527M tokens (527,327,687)
+# val has ~5M tokens (5,325,248)
 
 # to read the bin files later, e.g. with numpy:
 # m = np.memmap('train.bin', dtype=np.uint16, mode='r')
